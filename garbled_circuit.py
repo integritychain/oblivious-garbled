@@ -31,7 +31,9 @@ class Gate:
         input_labels = [x.evaluated_label for x in self.input_wires]
         for row in self.rows:
             result = Gate.crypt_row(row, input_labels)
-            if result in self.output_wire: self.output_wire.evaluated_label = result
+            if result in self.output_wire.labels:
+                self.output_wire.evaluated_label = result
+                break
 
     @classmethod  # Symmetric encrypt/decrypt
     def crypt_row(cls, data, keys):
